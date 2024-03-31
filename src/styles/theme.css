@@ -1,0 +1,90 @@
+/* Theme System by @hoqn
+ * <Hogyun Jeon, akzm9999@gmail.com> */
+
+/* Colours
+ * : 모든 색은 hsl */
+
+:root {
+  --color-white: 0 0 100%;
+  --color-black: 0 0 0%;
+  --color-cyan-1: 195 67% 99%;
+  --color-cyan-2: 187 53% 97%;
+  --color-cyan-3: 184 69% 92%;
+  --color-cyan-4: 187 71% 88%;
+  --color-cyan-5: 187 66% 83%;
+  --color-cyan-6: 188 61% 76%;
+  --color-cyan-7: 189 58% 68%;
+  --color-cyan-8: 189 60% 53%;
+  --color-cyan-9: 191 100% 39%;
+  --color-cyan-10: 191 93% 38%;
+  --color-cyan-11: 192 81% 33%;
+  --color-cyan-12: 192 69% 17%;
+  --color-slate-1: 240 20% 99%;
+  --color-slate-2: 240 20% 98%;
+  --color-slate-3: 240 11% 95%;
+  --color-slate-4: 240 10% 92%;
+  --color-slate-5: 230 11% 89%;
+  --color-slate-6: 240 10% 86%;
+  --color-slate-7: 233 10% 82%;
+  --color-slate-8: 231 10% 75%;
+  --color-slate-9: 231 6% 57%;
+  --color-slate-10: 226 5% 53%;
+  --color-slate-11: 220 6% 40%;
+  --color-slate-12: 210 13% 13%;
+}
+
+.dark {
+  --color-white: 0 0 0%;
+  --color-black: 0 0 100%;
+  --color-cyan-1: 196 41% 7%;
+  --color-cyan-2: 199 33% 9%;
+  --color-cyan-3: 193 74% 12%;
+  --color-cyan-4: 193 100% 14%;
+  --color-cyan-5: 193 100% 17%;
+  --color-cyan-6: 192 93% 21%;
+  --color-cyan-7: 193 75% 28%;
+  --color-cyan-8: 192 80% 34%;
+  --color-cyan-9: 191 100% 39%;
+  --color-cyan-10: 191 71% 48%;
+  --color-cyan-11: 190 75% 60%;
+  --color-cyan-12: 190 80% 84%;
+  --color-slate-1: 240 6% 7%;
+  --color-slate-2: 220 6% 10%;
+  --color-slate-3: 225 6% 14%;
+  --color-slate-4: 210 7% 16%;
+  --color-slate-5: 214 7% 19%;
+  --color-slate-6: 213 8% 23%;
+  --color-slate-7: 213 8% 28%;
+  --color-slate-8: 212 8% 38%;
+  --color-slate-9: 219 6% 44%;
+  --color-slate-10: 222 5% 49%;
+  --color-slate-11: 216 7% 71%;
+  --color-slate-12: 220 9% 94%;
+}
+
+:root {
+  /* Accents */
+  /* color.accent.container.background */
+  --color-ac-cont-bg: var(--color-cyan-2);
+  --color-ac-cont-fg: var(--color-cyan-12);
+  --color-ac-cont-mt: var(--color-cyan-9);
+  --color-ac-fill-bg: var(--color-cyan-9);
+  --color-ac-fill-fg: var(--color-white);
+  --color-ac-fill-mt: var(--color-cyan-5);
+
+  /* Base */
+  --color-bs-cont-bg: var(--color-slate-2);
+  --color-bs-cont-fg: var(--color-slate-12);
+  --color-bs-cont-mt: var(--color-slate-9);
+  --color-bs-fill-bg: var(--color-slate-9);
+  --color-bs-fill-fg: var(--color-white);
+  --color-bs-fill-mt: var(--color-slate-5);
+
+  /* Surface */
+  --color-sf-cont-bg: var(--color-slate-1);
+  --color-sf-cont-fg: var(--color-slate-12);
+  --color-sf-cont-mt: var(--color-slate-9);
+  --color-sf-fill-bg: var(--color-slate-9);
+  --color-sf-fill-fg: var(--color-white);
+  --color-sf-fill-mt: var(--color-slate-5);
+}
