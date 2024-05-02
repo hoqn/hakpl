@@ -1,20 +1,19 @@
-import { convertDateTo8digits } from "@/utils/date";
 import { fetchMealServiceDiet } from "@lib/neis/api";
 
 export default async function MealCards({
   schoolRegionCode,
   schoolCode,
-  date,
+  dateString,
 }: {
   schoolRegionCode: string;
   schoolCode: string;
-  date: Date;
+  dateString: string;
 }) {
   try {
     const res = await fetchMealServiceDiet({
       ATPT_OFCDC_SC_CODE: schoolRegionCode as any,
       SD_SCHUL_CODE: schoolCode,
-      MLSV_YMD: convertDateTo8digits(date),
+      MLSV_YMD: dateString,
     });
 
     if (res.totalCount === 0) return <div className="text-center p-4 text-muted">데이터가 없어요 :(</div>;
