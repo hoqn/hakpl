@@ -45,6 +45,7 @@ export default function SchoolClassList({ items }: { items: ClassInfoResponseIte
       <div className="flex flex-row flex-wrap justify-center gap-2 pb-4 border-b">
         {keys.map((key, i) => (
           <Button
+            key={key}
             variant={activeKey === i ? "accent" : "outline"}
             className="rounded-full"
             onClick={setActiveKey.bind(null, i)}
@@ -59,7 +60,7 @@ export default function SchoolClassList({ items }: { items: ClassInfoResponseIte
         ) : (
           <ul className="space-y-4">
             {Object.entries(hierarchy[keys[activeKey]]).map(([grade, classes]) => (
-              <li>
+              <li key={grade}>
                 <div className="text-sm font-medium text-muted mt-6 mb-4">{grade}학년</div>
                 <ul key={grade} className="flex flex-row flex-wrap gap-4">
                   {classes.map((className) => (

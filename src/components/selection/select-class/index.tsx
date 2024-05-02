@@ -1,4 +1,6 @@
-export default function Page({ children }: { children: React.ReactNode }) {
+import SelectClassBody from "./select-class-body";
+
+export default function SelectClass() {
   return (
     <div className="">
       {/* TOP */}
@@ -7,7 +9,9 @@ export default function Page({ children }: { children: React.ReactNode }) {
         <p className="mt-4 text-base">정보를 확인할 학급을 골라주세요</p>
       </div>
       {/* BODY */}
-      <div className="flex-grow py-4">{children}</div>
+      <div className="flex-grow py-4">
+        <SelectClassBody />
+      </div>
     </div>
   );
 }

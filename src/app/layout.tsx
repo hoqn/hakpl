@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 
 import localFont from "next/font/local";
 import Providers from "./providers";
-import { Drawer } from "vaul";
 
 const pretendard = localFont({
   src: "./fonts/PretendardVariable.woff2",

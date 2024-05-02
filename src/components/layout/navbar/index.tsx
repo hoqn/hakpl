@@ -11,6 +11,7 @@ import { MenuIcon, XIcon } from "lucide-react";
 import { Drawer } from "vaul";
 import { usePathname, useSearchParams } from "next/navigation";
 import MobileNav from "./mobile-nav";
+import Appbar from "../appbar";
 
 interface Props extends BaseProps, HTMLAttributes<HTMLDivElement> {}
 
@@ -28,10 +29,7 @@ export default function MainNavbar({ className, ...restProps }: Props) {
   }, [pathname, searchParams]);
 
   return (
-    <div
-      className={cn("w-full h-16 paint-surface-container bg-opacity-50 backdrop-blur-sm border-b", className)}
-      {...restProps}
-    >
+    <Appbar className={cn("paint-surface-container bg-opacity-50 backdrop-blur-sm border-b", className)} {...restProps}>
       <div className="container h-full mx-auto px-6 flex flex-row items-center">
         <Link className="font-medium text-xl whitespace-nowrap" href="/">
           학플
@@ -49,8 +47,8 @@ export default function MainNavbar({ className, ...restProps }: Props) {
               </Button>
             </Drawer.Trigger>
             <Drawer.Portal>
-              <Drawer.Overlay className="fixed inset-0 bg-surface-container-bg bg-opacity-50 backdrop-blur-xl" />
-              <Drawer.Content className="fixed top-0 bottom-0 right-0 w-full max-w-xs paint-surface-container bg-opacity-75 backdrop-blur-sm border shadow-xl rounded-l-2xl">
+              <Drawer.Overlay className="z-30 fixed inset-0 bg-surface-container-bg bg-opacity-50 backdrop-blur-xl" />
+              <Drawer.Content className="z-40 fixed top-0 bottom-0 right-0 w-full max-w-xs paint-surface-container bg-opacity-75 backdrop-blur-sm border shadow-xl rounded-l-2xl">
                 <MobileNav />
               </Drawer.Content>
             </Drawer.Portal>
@@ -69,6 +67,6 @@ export default function MainNavbar({ className, ...restProps }: Props) {
           <ColorModeSwitch mode="light" variant="ghost" />
         </div>
       </div>
-    </div>
+    </Appbar>
   );
 }

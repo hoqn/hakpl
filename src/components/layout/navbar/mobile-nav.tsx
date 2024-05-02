@@ -35,7 +35,7 @@ export default function MobileNav({ className }: { className?: string }) {
                 </p>
               )}
               <Button variant="link" size="sm" className="p-0" asChild>
-                <Link href="/select-school">정보 수정</Link>
+                <Link href="/select">정보 수정</Link>
               </Button>
             </>
           ) : (

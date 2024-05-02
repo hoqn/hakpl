@@ -12,10 +12,7 @@ export interface ColorModeSwitchProps extends Omit<ButtonProps, "children"> {
   mode: ColorMode;
 }
 
-export default function ColorModeSwitch({
-  mode,
-  ...restProps
-}: ColorModeSwitchProps) {
+export default function ColorModeSwitch({ mode, ...restProps }: ColorModeSwitchProps) {
   const { theme, setTheme } = useTheme();
 
   return (
@@ -30,7 +27,7 @@ export default function ColorModeSwitch({
       </DropdownMenu.Trigger>
 
       <DropdownMenu.Portal>
-        <DropdownMenu.Content className="paint-surface-container border shadow rounded-lg px-2 py-2">
+        <DropdownMenu.Content className="z-50 paint-surface-container border shadow rounded-lg px-2 py-2">
           <DropdownMenu.RadioGroup value={theme} onValueChange={setTheme}>
             <DropdownMenu.RadioItem
               value="light"

@@ -1,11 +1,16 @@
+"use client";
+
 import cn from "@/utils/cn";
 import Button from "../ui/button";
 import Link from "next/link";
 import { ChevronRightIcon, SchoolIcon, SparklesIcon, ZapIcon } from "lucide-react";
+import SchoolSelectModal, { useSchoolSelectModal } from "../selection/modal";
 
 const $section_inner = "container max-w-screen-md mx-auto px-6";
 
 export default function Landing() {
+  const { open, setOpen } = useSchoolSelectModal();
+
   return (
     <>
       <section className="paint-base-container">
@@ -17,16 +22,15 @@ export default function Landing() {
               variant="accent"
               size="lg"
               className="rounded-full px-6 py-4 text-base shadow-xl font-bold hover:shadow-md"
-              asChild
+              onClick={setOpen.bind(null, true)}
             >
-              <Link href="/select-school">
-                시작하기
-                <ChevronRightIcon className="inline ml-2" size="1.25em" strokeWidth="4px" />
-              </Link>
+              시작하기
+              <ChevronRightIcon className="inline ml-2" size="1.25em" strokeWidth="4px" />
             </Button>
           </div>
         </div>
       </section>
+      <SchoolSelectModal open={open} setOpen={setOpen} />
     </>
   );
 }

@@ -1,9 +1,7 @@
-import SchoolList from "@/components/select-school/school-list";
+import SchoolList from "@/components/selection/school-list";
 import { fetchSchoolInfo } from "@lib/neis/api";
 
-export default async function Page({ searchParams: { q } }: { searchParams: { q?: string } }) {
-  const searchQuery = q;
-
+export default async function SelectSchoolBody({ searchQuery = "" }: { searchQuery?: string }) {
   const res = await fetchSchoolInfo({ SCHUL_NM: searchQuery, pSize: 50, pIndex: 1 });
 
   if (res.items.length === 0) {
