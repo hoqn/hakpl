@@ -11,7 +11,7 @@ export default function SchoolSelectActions({ item }: { item: SchoolInfoResponse
   const router = useRouter();
   const setSchool = useSchoolStore((s) => s.setSchool);
 
-  const handleOnClick = useCallback(() => {
+  const handleOnClick = useCallback(async () => {
     const regionCode = item.ATPT_OFCDC_SC_CODE;
     const code = item.SD_SCHUL_CODE;
     const name = item.SCHUL_NM;
@@ -19,7 +19,7 @@ export default function SchoolSelectActions({ item }: { item: SchoolInfoResponse
     console.log(`Set to ${name}.`);
 
     setSchool({ regionCode, code, name });
-    setSchoolSession({ regionCode, code });
+    await setSchoolSession({ regionCode, code });
 
     router.replace("/select/class");
   }, [item.SD_SCHUL_CODE]);

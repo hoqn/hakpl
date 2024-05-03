@@ -7,7 +7,7 @@ export async function getSchoolSession() {
 
   if (!rawString) return null;
 
-  const [regionCode, code] = rawString.split(":");
+  const [regionCode, code] = rawString.split(".");
 
   return { code, regionCode };
 }
@@ -17,16 +17,16 @@ export async function getClassSession() {
 
   if (!rawString) return null;
 
-  const [grade, className] = rawString.split(":");
+  const [grade, className] = rawString.split(".");
 
   return { grade, className };
 }
 
 export async function setSchoolSession(values: { code: string; regionCode: string }) {
-  cookies().set("school", `${values.regionCode}:${values.code}`);
+  cookies().set("school", `${values.regionCode}.${values.code}`, { httpOnly: true, path: "/" });
   cookies().delete("class");
 }
 
 export async function setClassSession(values: { grade: string; className: string }) {
-  cookies().set("class", `${values.grade}:${values.className}`);
+  cookies().set("class", `${values.grade}.${values.className}`, { httpOnly: true, path: "/" });
 }
