@@ -4,15 +4,12 @@ import Button from "@/components/ui/button";
 import { XIcon } from "lucide-react";
 import Link from "next/link";
 import { Drawer } from "vaul";
-import SchoolGuard from "./school-guard";
-import cn from "@/utils/cn";
-import { useSchoolStore } from "@/providers/school-store-provider";
 import ColorModeSwitch from "./color-mode-switch";
+import { useClassSession, useSchoolSession } from "@/providers/school-session-provider";
 
 export default function MobileNav({ className }: { className?: string }) {
-  const school = useSchoolStore((s) => s.school);
-  const schoolGrade = useSchoolStore((s) => s.grade);
-  const schoolClass = useSchoolStore((s) => s.className);
+  const schoolSession = useSchoolSession();
+  const classSession = useClassSession();
 
   return (
     <>
@@ -26,12 +23,12 @@ export default function MobileNav({ className }: { className?: string }) {
       </div>
       <div className="px-6">
         <div className="pb-4">
-          {school ? (
+          {schoolSession ? (
             <>
-              <h4 className="text-lg font-bold">{school.name}</h4>
-              {schoolGrade && schoolClass && (
+              <h4 className="text-lg font-bold">{schoolSession.name}</h4>
+              {classSession && (
                 <p className="text-base">
-                  {schoolGrade}학년 {schoolClass}반
+                  {classSession.grade}학년 {classSession.classNum}반
                 </p>
               )}
               <Button variant="link" size="sm" className="p-0" asChild>

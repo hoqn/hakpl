@@ -1,14 +1,14 @@
-import { getClassSession, getSchoolSession } from "@/helpers/school.server";
 import TimetableSection from "./timetable";
 import NeedSchoolSet from "@/components/common/need-school-set";
 import NeedClassSet from "@/components/common/need-class-set";
+import { getClassSession, getSchoolSession } from "@/helpers/school-session";
 
 export default async function Page() {
-  const school = await getSchoolSession();
-  const schoolClass = await getClassSession();
+  const schoolSession = await getSchoolSession();
+  const classSession = await getClassSession();
 
-  if (!school) return <NeedSchoolSet />;
-  if (!schoolClass) return <NeedClassSet />;
+  if (!schoolSession) return <NeedSchoolSet />;
+  if (!classSession) return <NeedClassSet />;
 
   return (
     <div className="container mx-auto px-6">

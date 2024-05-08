@@ -1,10 +1,10 @@
 import NeedSchoolSet from "@/components/common/need-school-set";
-import { getSchoolSession } from "@/helpers/school.server";
-import { convertDateTo8digits } from "@/utils/date";
-import DatePick from "./date-pick";
-import AnimateWrapper from "./animate-wrapper";
 import MealCards from "@/components/meal/meal-cards";
+import { getSchoolSession } from "@/helpers/school-session";
+import { convertDateTo8digits } from "@/utils/date";
 import { Suspense } from "react";
+import AnimateWrapper from "./animate-wrapper";
+import DatePick from "./date-pick";
 
 export default async function Page({ searchParams }: { searchParams: { date?: string } }) {
   const dateString = searchParams.date || convertDateTo8digits(new Date());

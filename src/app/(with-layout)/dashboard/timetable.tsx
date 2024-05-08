@@ -1,9 +1,8 @@
 import DailyTimetable from "@/components/timetable/daily-table";
 import WeeklyTimetable from "@/components/timetable/weekly-table";
-import { getClassSession, getSchoolSession } from "@/helpers/school.server";
+import { getClassSession, getSchoolSession } from "@/helpers/school-session";
 import { DailyTimetableData, TimetableSubjectData } from "@/types/timetable.types";
 import { fetchTimetable } from "@lib/neis/api";
-import { Suspense } from "react";
 
 export default async function TimetableSection() {
   const school = await getSchoolSession();
@@ -16,7 +15,7 @@ export default async function TimetableSection() {
     ATPT_OFCDC_SC_CODE: school.regionCode,
     SD_SCHUL_CODE: school.code,
     GRADE: schoolClass.grade,
-    CLASS_NM: schoolClass.className,
+    CLASS_NM: schoolClass.classNum,
     ALL_TI_YMD: "20240328",
   });
 

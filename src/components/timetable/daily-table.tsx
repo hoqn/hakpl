@@ -48,5 +48,9 @@ export default function DailyTimetable({ data }: DailyTimetableProps) {
     return { renderedList };
   }, []);
 
-  return <table className="table-auto w-full">{renderedList}</table>;
+  return (
+    <table className="table-auto w-full">
+      <tbody>{renderedList}</tbody>
+    </table>
+  );
 }
