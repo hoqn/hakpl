@@ -1,17 +1,16 @@
 "use client";
 
 import cn from "@/utils/cn";
+import { MenuIcon } from "lucide-react";
 import Link from "next/link";
-import { HTMLAttributes, useEffect, useState } from "react";
-import Button from "../../ui/button";
-import ColorModeSwitch from "./color-mode-switch";
-import SchoolGuard from "./school-guard";
-import SchoolSelector from "./school-selector";
-import { MenuIcon, XIcon } from "lucide-react";
-import { Drawer } from "vaul";
 import { usePathname, useSearchParams } from "next/navigation";
-import MobileNav from "./mobile-nav";
+import { HTMLAttributes, useEffect, useState } from "react";
+import { Drawer } from "vaul";
+import Button from "../../ui/button";
 import Appbar from "../appbar";
+import ColorModeSwitch from "./color-mode-switch";
+import MobileNav from "./mobile-nav";
+import SchoolSelector from "./school-selector";
 
 interface Props extends BaseProps, HTMLAttributes<HTMLDivElement> {}
 

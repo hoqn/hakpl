@@ -1,6 +1,5 @@
 // "use client";
 
-import { useSchoolStore } from "@/providers/school-store-provider";
 import { XIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import {
@@ -17,6 +16,7 @@ import { Drawer } from "vaul";
 import { useShallow } from "zustand/react/shallow";
 import { AnimatePresence, MotionConfig, motion, useAnimate } from "framer-motion";
 import cn from "@/utils/cn";
+import { useClassSession, useSchoolSession } from "@/providers/school-session-provider";
 
 export function useSchoolSelectModal() {
   const [open, setOpen] = useState<boolean>(false);
@@ -27,7 +27,8 @@ export function useSchoolSelectModal() {
 const Content = forwardRef<HTMLDivElement>((_, ref) => {
   const router = useRouter();
 
-  const [school, className, grade] = useSchoolStore(useShallow((s) => [s.school, s.className, s.grade]));
+  const schoolSession = useSchoolSession();
+  const classSession = useClassSession();
 
   useLayoutEffect(() => {
     router.prefetch("/select/school");
@@ -65,13 +66,13 @@ const Content = forwardRef<HTMLDivElement>((_, ref) => {
             <dl
               className={cn(
                 "p-4 border cursor-pointer rounded-lg transition active:scale-95",
-                school ? "paint-accent-container" : "paint-base-container"
+                schoolSession ? "paint-accent-container" : "paint-base-container"
               )}
               onClick={handleOnClickSelectSchool}
             >
               <dt className="font-bold">학교</dt>
-              {school ? (
-                <dd className="text-sm">{school.name}</dd>
+              {schoolSession ? (
+                <dd className="text-sm">{schoolSession.name}</dd>
               ) : (
                 <dd className="text-sm text-muted">여기를 눌러 설정해주세요</dd>
               )}
@@ -79,14 +80,16 @@ const Content = forwardRef<HTMLDivElement>((_, ref) => {
             <dl
               className={cn(
                 "p-4 border cursor-pointer rounded-lg transition active:scale-95",
-                className && grade ? "paint-accent-container" : "paint-base-container"
+                !schoolSession && "opacity-50 pointer-events-none",
+                classSession ? "paint-accent-container" : "paint-base-container"
               )}
               onClick={handleOnClickSelectClass}
+              aria-disabled={!schoolSession}
             >
               <dt className="font-bold">학년과 반</dt>
-              {className && grade ? (
+              {classSession ? (
                 <dd className="text-sm">
-                  {grade}학년 {className}반
+                  {classSession.grade}학년 {classSession.classNum}반
                 </dd>
               ) : (
                 <dd className="text-sm text-muted">여기를 눌러 설정해주세요</dd>

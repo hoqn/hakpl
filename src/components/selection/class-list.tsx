@@ -63,9 +63,9 @@ export default function SchoolClassList({ items }: { items: ClassInfoResponseIte
               <li key={grade}>
                 <div className="text-sm font-medium text-muted mt-6 mb-4">{grade}학년</div>
                 <ul key={grade} className="flex flex-row flex-wrap gap-4">
-                  {classes.map((className) => (
-                    <li key={className}>
-                      <SchoolClassListItem grade={grade} className={className} />
+                  {classes.map((classNum) => (
+                    <li key={classNum}>
+                      <SchoolClassListItem grade={grade} classNum={classNum} />
                     </li>
                   ))}
                 </ul>

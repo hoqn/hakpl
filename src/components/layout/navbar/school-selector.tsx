@@ -1,22 +1,19 @@
 "use client";
 
-import { useSchoolStore } from "@/providers/school-store-provider";
-import Button from "../../ui/button";
-import { useRouter } from "next/navigation";
-import cn from "@/utils/cn";
-import Link from "next/link";
 import SchoolSelectModal, { useSchoolSelectModal } from "@/components/selection/modal";
+import { useClassSession, useSchoolSession } from "@/providers/school-session-provider";
+import cn from "@/utils/cn";
+import Button from "../../ui/button";
 
 export interface SchoolSelectorProps extends React.HTMLAttributes<HTMLButtonElement> {}
 
 export default function SchoolSelector({ className, ...restProps }: SchoolSelectorProps) {
-  const school = useSchoolStore((s) => s.school);
-  const grade = useSchoolStore((s) => s.grade);
-  const schoolClass = useSchoolStore((s) => s.className);
+  const schoolSession = useSchoolSession();
+  const classSession = useClassSession();
 
   const { open, setOpen } = useSchoolSelectModal();
 
-  if (!school) {
+  if (!schoolSession) {
     return (
       <>
         <Button variant="link" className={className} {...restProps} onClick={setOpen.bind(null, true)}>
@@ -35,9 +32,9 @@ export default function SchoolSelector({ className, ...restProps }: SchoolSelect
         {...restProps}
         onClick={setOpen.bind(null, true)}
       >
-        <span>{school.name}</span>
-        {grade && <span>{grade}학년</span>}
-        {schoolClass && <span>{schoolClass}반</span>}
+        <span>{schoolSession.name}</span>
+        {classSession && classSession.grade && <span>{classSession.grade}학년</span>}
+        {classSession && classSession.classNum && <span>{classSession.classNum}반</span>}
       </Button>
       <SchoolSelectModal open={open} setOpen={setOpen} />
     </>
