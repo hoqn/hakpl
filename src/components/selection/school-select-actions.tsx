@@ -14,7 +14,7 @@ export default function SchoolSelectActions({ item }: { item: SchoolInfoResponse
     const code = item.SD_SCHUL_CODE;
     const name = item.SCHUL_NM;
 
-    setSchoolSession({ regionCode, code, name });
+    await setSchoolSession({ regionCode, code, name });
 
     router.replace("/select/class");
   }, [item.SD_SCHUL_CODE]);

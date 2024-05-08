@@ -8,8 +8,8 @@ import { useRouter } from "next/navigation";
 export default function SchoolClassListItem({ grade, classNum }: { grade: string; classNum: string }) {
   const router = useRouter();
 
-  const handleOnClick = () => {
-    setClassSession({ grade, classNum });
+  const handleOnClick = async () => {
+    await setClassSession({ grade, classNum });
 
     router.replace("/");
   };
