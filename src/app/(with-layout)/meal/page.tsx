@@ -1,7 +1,7 @@
 import NeedSchoolSet from "@/components/common/need-school-set";
 import MealCards from "@/components/meal/meal-cards";
 import { getSchoolSession } from "@/helpers/school-session";
-import { convertDateTo8digits } from "@/utils/date";
+import { convert8digitsToDate, convertDateTo8digits } from "@/utils/date";
 import { Suspense } from "react";
 import AnimateWrapper from "./animate-wrapper";
 import DatePick from "./date-pick";
@@ -16,13 +16,15 @@ export default async function Page({ searchParams }: { searchParams: { date?: st
   const dateString = searchParams.date;
   const schoolSession = await getSchoolSession();
 
+  const date = convert8digitsToDate(dateString);
+
   if (!dateString) return null;
   if (!schoolSession) return <NeedSchoolSet />;
-  
+
   return (
     <div className="container mx-auto px-6 overflow-x-hidden">
       <div className="flex flex-row justify-center items-center py-6 border-b">
-        <DatePick />
+        <DatePick initialDate={date} />
       </div>
       <AnimateWrapper dateString={dateString}>
         <Suspense>
