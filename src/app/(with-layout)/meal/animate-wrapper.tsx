@@ -1,32 +1,53 @@
 "use client";
 
 import { convert8digitsToDate } from "@/utils/date";
-import { compareAsc } from "date-fns";
-import { AnimatePresence, Variants, motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, Transition, Variants, motion } from "framer-motion";
+import { useMemo, useState } from "react";
 
 const animMealCards: Variants = {
-  initial: {
+  in: (dir: 1 | -1) => ({
     opacity: 0,
-  },
-  animate: {
+    translateX: dir > 0 ? 32 : -32,
+  }),
+  out: (dir: 1 | -1) => ({
+    opacity: 0,
+    translateX: dir > 0 ? -32 : 32,
+  }),
+  active: {
     opacity: 1,
-  },
-  exit: {
-    opacity: 0,
+    translateX: 0,
   },
 };
 
+const transitionMealCards: Transition = {
+  duration: 0.25,
+  bounce: 0,
+  ease: "circInOut",
+};
+
 export default function AnimateWrapper({ children, dateString }: { children: React.ReactNode; dateString: string }) {
+  const [prevDate, setPrevDate] = useState(convert8digitsToDate(dateString));
+
+  const direction = useMemo(() => {
+    const _prevDate = prevDate;
+    const _currDate = convert8digitsToDate(dateString);
+
+    setPrevDate(_currDate);
+
+    return _prevDate < _currDate ? 1 : -1;
+  }, [dateString]);
+
   return (
-    <AnimatePresence mode="wait" initial={false}>
+    <AnimatePresence mode="wait" initial={false} custom={direction}>
       <motion.div
         key={dateString}
         className="py-6 flex flex-col lg:flex-row justify-center gap-4"
         variants={animMealCards}
-        initial="initial"
-        animate="animate"
-        exit="exit"
+        custom={direction}
+        initial="in"
+        animate="active"
+        exit="out"
+        transition={transitionMealCards}
       >
         {children}
       </motion.div>
