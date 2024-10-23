@@ -1,10 +1,12 @@
 import DailyTimetable from "@/components/timetable/daily-table";
-import WeeklyTimetable from "@/components/timetable/weekly-table";
 import { getClassSession, getSchoolSession } from "@/helpers/school-session";
 import { DailyTimetableData, TimetableSubjectData } from "@/types/timetable.types";
+import { convertDateTo8digits } from "@/utils/date";
 import { fetchTimetable } from "@lib/neis/api";
 
-export default async function TimetableSection() {
+export default async function TimetableSection({ date }: { date: Date }) {
+  const dateString = convertDateTo8digits(date);
+
   const school = await getSchoolSession();
   const schoolClass = await getClassSession();
 
@@ -16,7 +18,7 @@ export default async function TimetableSection() {
     SD_SCHUL_CODE: school.code,
     GRADE: schoolClass.grade,
     CLASS_NM: schoolClass.classNum,
-    ALL_TI_YMD: "20240328",
+    ALL_TI_YMD: dateString,
   });
 
   // RES -> Daily
@@ -56,26 +58,9 @@ export default async function TimetableSection() {
     if (endTime > dailyTimetableData.maxTime) dailyTimetableData.maxTime = endTime;
   });
 
-  return (
-    <div className="">
-      <WeeklyTimetable
-        data={{
-          minDay: 1,
-          maxDay: 5,
-          minTime: 1,
-          maxTime: 7,
-          SCC: 1,
-          version: 2,
-          subjects: [
-            {
-              id: 1,
-              name: "테스트과목",
-              cells: [{ day: 1, startTime: 4, endTime: 5 }],
-            },
-          ],
-        }}
-      />
-      <DailyTimetable data={dailyTimetableData} />
-    </div>
-  );
+  if (dailyTimetableData.subjects.length == 0) {
+    return <div className="text-center">등록된 시간표가 없어요</div>;
+  }
+
+  return <DailyTimetable data={dailyTimetableData} />;
 }
